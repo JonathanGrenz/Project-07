@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% load static from staticfiles %}
+
+
+{% block title %}User Profile | {{ user.username }}{% endblock %}
+
+{% block body %}
+<div class="grid-25">	
+</div>
+<div class="grid-75">
+	<h2>{{ user.username }}</h2>
+	{% if user.profile.avatar %}
+	<div>
+		<img src="{{ user.profile.avatar.url }}">
+	</div>
+	{% else %}
+	<p>No photo available</p>
+	{% endif %}
+	<table>
+        <tr><td>Name:</td> <td>{{ user.profile.first_name }} {{ user.profile.last_name }}</td></tr>
+		<tr><td>Email:</td> <td>{{ user.profile.email }}</td></tr>
+		<tr><td>Date of Birth:</td> <td>{{ user.profile.dob }}</td></tr>
+		<tr><td>Bio:</td> <td>{{ user.profile.bio }}</td></tr>
+	</table>
+	<form action="{% url 'accounts:edit' %}">
+		<button type="submit">Edit</button>
+	</form>
+	<form action="{% url 'accounts:change_password' %}">
+		<button type="submit">Change Password</button>
+	</form>
+</div>
+{% endblock %}
